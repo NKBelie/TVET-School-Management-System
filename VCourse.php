@@ -85,7 +85,10 @@ table{width:90%;border-collapse:collapse;}th,td{border:1px solid black;padding:8
 <div class="content">
 	<center><br><br><br>
 <h2>Registered Courses</h2>
-
+<?php $successMsg = $_GET['success'] ?? '';
+$errorMsg = $_GET['error'] ?? '';
+if ($successMsg) echo "<p class='success'>$successMsg!</p>";
+if ($errorMsg) echo "<p class='error'>$errorMsg</p>"; ?>
 <?php if ($result->num_rows > 0): ?>
 <table>
 <tr><th>ID</th><th>Title</th><th>Description</th><th>Duration</th><th>Start Date</th><th>Actions</th></tr>
@@ -97,7 +100,10 @@ table{width:90%;border-collapse:collapse;}th,td{border:1px solid black;padding:8
 <td><?= $row['Description']; ?></td>
 <td><?= $row['Duration']; ?> weeks</td>
 <td><?= $row['Start_Date']; ?></td>
-<td><button disabled>Edit</button><button disabled>Delete</button></td>
+<td>
+    <a href="EditCourse.php?id=<?php echo urlencode($row['Course_Id']); ?>"><button>Edit</button></a>
+    <a href="DeleteCourse.php?id=<?php echo urlencode($row['Course_Id']); ?>" onclick="return confirm('Are you sure?');"><button>Delete</button></a>
+</td>
 </tr>
 <?php endwhile; ?>
 </table>

@@ -9,6 +9,10 @@ require 'db.php';
 
 $message = "";
 $result = false;
+$successMsg = $_GET['success'] ?? '';
+$errorMsg = $_GET['error'] ?? '';
+if ($successMsg) echo "<p class='success'>$successMsg!</p>";
+if ($errorMsg) echo "<p class='error'>$errorMsg</p>";
 
 // Quick connection check
 if (!isset($conn) || !$conn || $conn->connect_error) {

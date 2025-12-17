@@ -108,6 +108,11 @@ $result = $conn->query("SELECT * FROM instructor ORDER BY Instructor_Id ASC");
 <div class="content">
 <center><br><br><br>
 	<h2>Registered Instructors</h2>
+	<?php 
+	$successMsg = $_GET['success'] ?? '';
+$errorMsg = $_GET['error'] ?? '';
+if ($successMsg) echo "<p class='success'>$successMsg!</p>";
+if ($errorMsg) echo "<p class='error'>$errorMsg</p>"; ?>
 
 	<?php if ($result->num_rows > 0): ?>
 
@@ -131,9 +136,9 @@ $result = $conn->query("SELECT * FROM instructor ORDER BY Instructor_Id ASC");
 			<td><?= $row['Specialization']; ?></td>
 			<td><?= $row['Hire_Date']; ?></td>
 			<td>
-				<button disabled>Edit</button>
-				<button disabled>Delete</button>
-			</td>
+                <a href="EditInstructor.php?id=<?php echo urlencode($row['Instructor_Id']); ?>"><button>Edit</button></a>
+                <a href="DeleteInstructor.php?id=<?php echo urlencode($row['Instructordocker --version_Id']); ?>" onclick="return confirm('Are you sure?');"><button>Delete</button></a>
+            </td>
 		</tr>
 		<?php endwhile; ?>
 

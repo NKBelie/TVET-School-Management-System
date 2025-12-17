@@ -116,7 +116,12 @@ if (!isset($conn) || !$conn || $conn->connect_error) {
         <h2>Attendance Records</h2>
 
         <?php if ($message != ""): ?>
-            <p class="error"><?php echo $message; ?></p>
+            <p class="error"><?php echo $message; 
+            $successMsg = $_GET['success'] ?? '';
+$errorMsg = $_GET['error'] ?? '';
+if ($successMsg) echo "<p class='success'>$successMsg!</p>";
+if ($errorMsg) echo "<p class='error'>$errorMsg</p>";
+        ?></p>
         <?php elseif ($result && $result->num_rows > 0): ?>
             <table>
                 <tr>

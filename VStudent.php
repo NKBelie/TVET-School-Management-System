@@ -108,6 +108,11 @@ $result = $conn->query("SELECT * FROM student ORDER BY Student_Id ASC");
 <div class="content">
 <center><br><br><br>
 	<h2>Registered Students</h2>
+	<?php 
+	$successMsg = $_GET['success'] ?? '';
+$errorMsg = $_GET['error'] ?? '';
+if ($successMsg) echo "<p class='success'>$successMsg!</p>";
+if ($errorMsg) echo "<p class='error'>$errorMsg</p>"; ?>
 
 	<?php if ($result->num_rows > 0): ?>
 
@@ -133,9 +138,9 @@ $result = $conn->query("SELECT * FROM student ORDER BY Student_Id ASC");
 			<td><?= $row['Enrollment_Date']; ?></td>
 			<td><?= $row['Status']; ?></td>
 			<td>
-				<button disabled>Edit</button>
-				<button disabled>Delete</button>
-			</td>
+                <a href="EditStudent.php?id=<?php echo urlencode($row['Student_Id']); ?>"><button>Edit</button></a>
+                <a href="DeleteStudent.php?id=<?php echo urlencode($row['Student_Id']); ?>" onclick="return confirm('Are you sure?');"><button>Delete</button></a>
+            </td>
 		</tr>
 		<?php endwhile; ?>
 
